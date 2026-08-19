@@ -1,4 +1,4 @@
-# Chapter 1 — Introduction to C
+# Chapter 1 — Introduction to Computers and C
 
 ## Main Concepts
 
