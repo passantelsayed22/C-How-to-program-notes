@@ -9,7 +9,7 @@ To understand the fundamentals of C programming and build a strong foundation in
 
 ## 📖 Chapters
 
-- [x] [Chapter 1 — Computer & Programming Fundamentals](./Chapter-1.md)
+- [x] [Chapter 1 — Introduction to Computer and C]
 
 More chapters will be added as I progress through the book.
 
