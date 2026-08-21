@@ -360,6 +360,7 @@ Using multiple cores provides another way to increase overall processing perform
 
     
 
+
 ## لغات البرمجة 🧩
 
 الفكرة الأساسية:
@@ -377,7 +378,7 @@ Using multiple cores provides another way to increase overall processing perform
 | **R** | Statistics و Data Analysis |
 | **BASIC** | تعليم المبتدئين، والإصدارات الحديثة تدعم OOP |
 
-### أهم 3 أفكار
+### أهم الأفكار
 
 - **Java → JVM → Write Once, Run Anywhere**
 - **JavaScript → Browser + Node.js**
@@ -385,978 +386,829 @@ Using multiple cores provides another way to increase overall processing perform
 
 ---
 
-# رحلة الكود من الكتابة للتشغيل ⚙️
+## رحلة الكود من الكتابة للتشغيل ⚙️
 
 أهم سلسلة في الشابتر:
 
 **Edit → Preprocess → Compile → Link → Load → Execute**
 
-### 1️⃣ Edit
+### Edit
 
 المبرمج يكتب الكود ويحفظه، مثلًا:
 
 ```text
 program.c
-### 1️⃣ Edit
-المبرمج يكتب الكود ويحفظه، مثلًا:
-```text
-program.c
+```
 
-⸻
+### Preprocess
 
-2️⃣ Preprocess
+الـ **Preprocessor** ينفذ التعليمات التي تبدأ بـ `#`، مثل:
 
-الـ Preprocessor ينفذ أوامر خاصة قبل عملية الـ Compile.
-
-مثال:
-
+```c
 #include <stdio.h>
+```
 
-الأوامر التي تبدأ بـ # تسمى Preprocessor Directives.
+ويجهز الكود قبل مرحلة الـ Compilation.
 
-⸻
+### Compile
 
-3️⃣ Compile
+الـ **Compiler** يحول كود C إلى **Object Code**.
 
-الـ Compiler يحول الـ Source Code إلى Object Code.
+لو فيه خطأ في قواعد اللغة، يظهر:
 
-وفي هذه المرحلة يمكن اكتشاف أخطاء الـ Syntax.
-
-مثال:
-
-printf("Hello")
-
-نسيان ; قد يؤدي إلى:
-
+```text
+Syntax Error
 Compilation Error
+```
 
-⸻
+### Link
 
-4️⃣ Link
+الـ **Linker** يربط الـ Object Code بالدوال الموجودة في المكتبات الخارجية، وينتج البرنامج القابل للتشغيل.
 
-الـ Linker يربط الـ Object Code بالمكتبات والـ Functions المطلوبة.
+في بعض بيئات Unix/Linux يكون الاسم الافتراضي:
 
-Object Code
-     +
-Libraries
-     ↓
-Executable
+```text
+a.out
+```
 
-⸻
+### Load
 
-5️⃣ Load
+الـ **Loader** ينقل البرنامج من الـ Disk إلى الـ Main Memory (RAM).
 
-الـ Loader ينقل البرنامج من الـ Disk إلى الـ Main Memory (RAM) حتى يصبح جاهزًا للتنفيذ.
+### Execute
 
-Disk
- ↓
-RAM
+الـ CPU يبدأ تنفيذ التعليمات.
 
-⸻
+ممكن تظهر أخطاء أثناء التشغيل مثل:
 
-6️⃣ Execute
-
-الـ CPU يبدأ في تنفيذ تعليمات البرنامج.
-
-وهنا يمكن أن تحدث Runtime Errors.
-
-مثال:
-
-int x = 10 / 0;
-
-⸻
-
-🚨 أنواع الأخطاء المهمة
-
-Syntax / Compile Error
-
-خطأ في قواعد كتابة اللغة ويظهر أثناء الـ Compilation.
-
+```text
 Runtime Error
+```
 
-خطأ يحدث أثناء تشغيل البرنامج.
+ومن أمثلتها:
 
-مثال:
+```text
+Divide by Zero
+```
 
-Divide by zero
-Invalid memory access
+---
 
-⸻
+## Streams 📥📤
 
- Standard Streams 📥📤
+البرنامج بيتعامل مع 3 Streams أساسية:
 
-البرنامج يتعامل مع البيانات من خلال ثلاثة Streams أساسية:
+```text
+stdin   → Standard Input
+stdout  → Standard Output
+stderr  → Standard Error
+```
 
-Stream	الوظيفة
-stdin	Standard Input
-stdout	Standard Output
-stderr	Standard Error
+عادةً:
 
-بشكل افتراضي:
+```text
+stdin  → Keyboard
+stdout → Screen
+stderr → Error messages
+```
 
-Keyboard → stdin → Program → stdout → Screen
-                         ↘️
-                          stderr → Screen
+لكن ممكن إعادة توجيه الـ Streams بحيث البيانات تيجي من File أو مصدر آخر.
 
-لكن يمكن عمل Redirection للـ Streams بحيث تأتي البيانات من File بدل الـ Keyboard أو يتم حفظ الـ Output في File.
+---
 
+## بيئات تطوير C 💻
 
-⸻
+الكتاب ذكر:
 
- Internet 🌐
+```text
+Windows → Visual Studio
+macOS   → Xcode / Clang
+Linux   → GCC
+```
 
-من أهم اللبنات التاريخية للإنترنت:
+وفي الـ Terminal ممكن استخدام:
 
-ARPA → ARPANET
+```bash
+gcc -std=c18 program.c
+./a.out
+```
 
-تم إنشاء ARPANET في أواخر الستينيات لربط أجهزة الكمبيوتر في المؤسسات البحثية والجامعات.
+---
 
-⸻
+## Project و Solution
 
- TCP
+في Visual Studio:
 
-TCP — Transmission Control Protocol
+```text
+Project
+↓
+مجموعة ملفات تخص برنامج معين
 
-يساعد على توصيل البيانات بصورة موثوقة.
+Solution
+↓
+مجموعة Projects
+```
 
-يمكن تخيل البيانات الكبيرة كأنها يتم تقسيمها إلى:
+---
 
-Packets
+## Guess Number Game 🎯
 
-ثم يتم التعامل معها بحيث يمكن إعادة تجميع البيانات عند الوصول.
+اللعبة تعتمد على تخمين رقم بين:
 
-⸻
+```text
+1 → 1000
+```
 
- IP
+والفكرة مرتبطة بمفهوم:
 
-IP — Internet Protocol
+```text
+Binary Search
+```
 
-يهتم بالعنونة والتعامل مع عناوين الأجهزة على الشبكة.
+لأننا في كل محاولة بنقسم نطاق البحث تقريبًا إلى النصف.
 
-كل جهاز يمكن أن يكون له:
+عدد المحاولات القصوى تقريبًا:
 
-IP Address
+```text
+log₂(1000) ≈ 10
+```
 
-بشكل مبسط:
+---
 
-TCP → Reliable Delivery
-IP  → Addressing / Routing
+## الإنترنت والويب 🌐
 
-⸻
+### ARPANET
 
- Internet vs Web
+في أواخر الستينات ظهرت:
 
+```text
+ARPA
+↓
+ARPANET
+↓
 Internet
+```
 
-البنية التحتية التي تربط الأجهزة:
+وكان الهدف الأساسي ربط أجهزة الكمبيوتر في الجامعات ومراكز الأبحاث.
 
-* Routers
-* Cables
-* Networks
-* Servers
+---
 
-World Wide Web
+## TCP/IP
 
-خدمة تعمل فوق الإنترنت وتضم صفحات ومواقع الويب.
+### TCP
 
-إذن:
+يقسم البيانات إلى أجزاء صغيرة:
 
-Internet ≠ Web
+```text
+Data
+↓
+Packets
+↓
+Transmission
+↓
+Reassembly
+```
 
-⸻
+ويضمن وصولها بالترتيب الصحيح.
 
- World Wide Web 🌍
+### IP
 
-ارتبط ظهور الـ Web بـ:
+يعطي الأجهزة عناوين تساعد الشبكات على معرفة مكان إرسال البيانات.
 
-Tim Berners-Lee
+```text
+IP Address
+```
 
-في CERN سنة:
+### TCP/IP
 
+الاتنين مع بعض يشكلوا أساسًا مهمًا من أساسيات الاتصال عبر الإنترنت.
+
+---
+
+## Internet vs Web
+
+### Internet
+
+هو البنية التحتية:
+
+```text
+Cables
+Routers
+Servers
+Networks
+```
+
+### World Wide Web
+
+هو الخدمات والصفحات والمواقع التي تعمل فوق الإنترنت.
+
+---
+
+## Tim Berners-Lee
+
+سنة:
+
+```text
 1989
+```
+
+طوّر الـ **World Wide Web** في CERN.
 
 ومن أهم التقنيات المرتبطة بالويب:
 
+```text
 HTML
+HTTP
+```
 
-HyperText Markup Language
+### HTML
 
 تستخدم لبناء صفحات الويب والروابط.
 
-HTTP
+### HTTP
 
-HyperText Transfer Protocol
+بروتوكول لنقل بيانات الويب.
 
-يستخدم لنقل موارد وبيانات الويب.
+### W3C
 
-W3C
+منظمة تهدف إلى وضع معايير للويب تساعد التقنيات والمتصفحات على العمل بطريقة متوافقة.
 
-منظمة تهتم بوضع معايير للويب.
+---
 
-⸻
+## Cloud Computing ☁️
 
- IoT — Internet of Things 📡
+بدل ما تكون كل الموارد على جهازك، ممكن تعتمد على موارد موجودة عبر الإنترنت.
 
-الـ IoT يعني ربط الأشياء والأجهزة بالشبكة.
+مثل:
+
+```text
+Computing Power
+Storage
+Databases
+Software
+```
+
+ومن نماذج:
+
+```text
+SaaS → Software as a Service
+PaaS → Platform as a Service
+IaaS → Infrastructure as a Service
+```
+
+---
+
+## Mashups 🧩
+
+فكرة الـ **Mashups** هي دمج أكثر من Web Service أو مصدر بيانات لبناء تطبيق جديد.
+
+مثال:
+
+```text
+Real Estate Data
++
+Maps Service
+↓
+Application
+```
+
+بدل بناء كل شيء من الصفر.
+
+---
+
+## Internet of Things — IoT 📡
+
+الـ IoT هو ربط الأشياء والأجهزة بالشبكات بحيث تستطيع إرسال واستقبال البيانات.
 
 أمثلة:
 
-* Sensors
-* Smart Meters
-* Temperature Sensors
-* Medical Devices
-* Tracking Devices
+```text
+Smart Sensors
+Smart Meters
+Temperature Sensors
+Medical Devices
+Tracking Devices
+```
 
 الفكرة:
 
+```text
 Thing
- ↓
+↓
 Network
- ↓
+↓
 Data
- ↓
-Software
+↓
+System
+```
 
-⸻
+---
 
- Cloud Computing ☁️
+## Software Technologies 🛠️
 
-Cloud Computing يعني استخدام موارد حوسبية عبر الإنترنت بدل الاعتماد فقط على الجهاز المحلي.
-
-يمكن أن تشمل:
-
-* Computing Power
-* Storage
-* Databases
-* Networking
-* Software
-
-ومن فوائدها:
-
-* استخدام الموارد حسب الحاجة.
-* تقليل الحاجة لشراء Hardware قوي.
-* الاستفادة من خدمات جاهزة.
-* إدارة وتحديث الموارد بواسطة مزود الخدمة.
-
-⸻
-
- As a Service
-
-أشهر النماذج:
-
-SaaS
-
-Software as a Service
-
-استخدام Software كخدمة.
-
-PaaS
-
-Platform as a Service
-
-استخدام Platform جاهزة لتطوير وتشغيل التطبيقات.
-
-IaaS
-
-Infrastructure as a Service
-
-استخدام Infrastructure مثل:
-
-* Servers
-* Storage
-* Networking
-
-⸻
-
- Mashups 🧩
-
-الـ Mashup هو دمج أكثر من Web Service لبناء تطبيق جديد.
-
-مثال:
-
-Real Estate Data
-       +
-Maps Service
-       ↓
-Real Estate Map Application
-
-الفكرة:
-
-Reuse existing services instead of building everything from scratch.
-
-⸻
-
- Software Technologies 🛠️
-
-Refactoring
+### Refactoring
 
 تعديل وتنظيم الكود بدون تغيير وظيفته الأساسية.
 
-Messy Code
-    ↓
-Refactoring
-    ↓
-Clean + Organized Code
+الهدف:
 
-أهدافه:
-
-* Readability
-* Maintainability
-* Better Organization
-* Easier Modification
-
-⸻
-
-Design Patterns
-
-حلول وتصميمات مجربة لمشاكل برمجية متكررة.
-
-Repeated Problem
-       ↓
-Known Pattern
-       ↓
-Reusable Solution
-
-⸻
-
-SDK
-
-SDK — Software Development Kit
-
-مجموعة أدوات وDocumentation تساعد المبرمج على بناء تطبيقات لمنصة معينة.
-
-يمكن أن تحتوي على:
-
-* Development Tools
-* Libraries
-* Documentation
-* APIs
-* Utilities
+```text
+Cleaner Code
+Easier Maintenance
+Better Readability
+```
 
 مثال:
 
+```text
+Large Function
+↓
+Smaller Functions
+↓
+Cleaner Code
+```
+
+---
+
+### Design Patterns
+
+حلول وتصميمات مجربة لمشاكل برمجية متكررة.
+
+الفكرة:
+
+```text
+Repeated Problem
+↓
+Known Pattern
+↓
+Reusable Solution
+```
+
+---
+
+### SDK
+
+اختصار:
+
+```text
+Software Development Kit
+```
+
+وهي مجموعة أدوات وDocumentation تساعد المبرمج على بناء تطبيقات لبيئة معينة.
+
+مثال:
+
+```text
 iOS SDK
+```
 
-⸻
+---
 
- Big Data 📊
+## Big Data 📊
 
-Big Data تعني التعامل مع كميات ضخمة ومعقدة من البيانات.
+البيانات أصبحت ضخمة جدًا من حيث الحجم والسرعة والتنوع.
 
-أهم خصائصها:
+وحدات قياس البيانات:
 
-Volume
-Velocity
-Variety
-Veracity
+```text
+Byte
+↓
+Kilobyte (KB)
+↓
+Megabyte (MB)
+↓
+Gigabyte (GB)
+↓
+Terabyte (TB)
+↓
+Petabyte (PB)
+↓
+Exabyte (EB)
+↓
+Zettabyte (ZB)
+```
 
-⸻
+تقريبًا:
 
- The Four Vs of Big Data
+```text
+1 KB ≈ 2¹⁰ Bytes
+1 MB ≈ 2²⁰ Bytes
+1 GB ≈ 2³⁰ Bytes
+1 TB ≈ 2⁴⁰ Bytes
+```
 
-1️⃣ Volume
+وبالنسبة للوحدات الكبيرة:
 
-كمية البيانات.
+```text
+1 PB = 1000 TB
+1 EB = 1000 PB
+1 ZB = 1000 EB
+```
 
+---
+
+## Memory Limits 🧠
+
+في Problem Solving ممكن تلاقي:
+
+```text
+Memory Limit: 256 MB
+```
+
+مثال:
+
+لو عندنا:
+
+```text
+100,000,000 integers
+```
+
+والـ `int` حجمه:
+
+```text
+4 Bytes
+```
+
+فالمصفوفة تحتاج:
+
+```text
+100,000,000 × 4
+= 400,000,000 Bytes
+```
+
+أي حوالي:
+
+```text
+400 MB
+```
+
+وده أكبر من:
+
+```text
+256 MB
+```
+
+وبالتالي ممكن يحصل:
+
+```text
+Memory Limit Exceeded
+```
+
+---
+
+## Big Data Analytics 📈
+
+مصطلح:
+
+```text
+Data Analysis
+```
+
+ظهر في وقت مبكر من تاريخ الحوسبة، بينما مصطلح:
+
+```text
+Big Data
+```
+
+ظهر لاحقًا مع زيادة حجم البيانات.
+
+---
+
+## The Four V's of Big Data
+
+### Volume
+
+حجم البيانات.
+
+```text
 How much data?
+```
 
-⸻
+### Velocity
 
-2️⃣ Velocity
+سرعة إنتاج البيانات وحركتها وتغيرها.
 
-سرعة توليد البيانات وحركتها وتغيرها.
-
+```text
 How fast?
+```
 
-⸻
-
-3️⃣ Variety
+### Variety
 
 تنوع أنواع البيانات.
 
 مثل:
 
-Text
-Images
-Video
-Audio
-Sensor Data
-
-How many types?
-
-⸻
-
-4️⃣ Veracity
-
-مدى صحة وموثوقية البيانات.
-
-Can we trust the data?
-
-⸻
-
- Big Data Example — Social Media
-
-تخيلي منصة Social Media:
-
-Volume
-
-مليارات المنشورات.
-
-Velocity
-
-البيانات والتفاعلات تحدث باستمرار.
-
-Variety
-
+```text
 Text
 Images
 Videos
 Audio
+Sensor Data
+```
 
-Veracity
+### Veracity
 
-هل المعلومات المنشورة صحيحة أم Fake News؟
+مدى صحة وموثوقية البيانات.
 
-⸻
+```text
+Can we trust the data?
+```
 
- Data Analysis
+---
 
-ظهر مصطلح Data Analysis في الستينيات.
+## Moore's Law ⚡
 
-ومع زيادة حجم البيانات وتطور قدرة الكمبيوتر على تخزينها ومعالجتها، أصبح تحليل البيانات مجالًا مهمًا جدًا.
-
-⸻
-
- Moore’s Law
-
-يرتبط Moore’s Law بالملاحظة التاريخية لتطور عدد الـ Transistors في الدوائر المتكاملة.
+قانون مور ارتبط بتطور قدرات المعالجة وزيادة كثافة الترانزستورات مع مرور الوقت.
 
 الفكرة العامة:
 
-More Transistors
-        ↓
-More Computing Capability
-        ↓
-Lower Cost per Computing Capability
+```text
+Hardware Power
+↑
+Cost per computation
+↓
+```
 
-وساعد هذا التطور على:
+وده ساعد على تخزين ومعالجة كميات ضخمة من البيانات بتكلفة أقل.
 
-* زيادة القدرة الحسابية.
-* زيادة سعة التخزين.
-* تقليل تكلفة معالجة البيانات.
+---
 
-⸻
+## Insight 🧠
 
- Goal of Computing 🧠
+الفكرة المهمة التي ذكرها الكتاب:
 
-الفكرة المهمة:
+> الهدف من الحوسبة ليس مجرد الحصول على أرقام، وإنما الوصول إلى فهم وInsight مفيد.
 
-The goal of computing is insight, not numbers.
+يعني:
 
-أي أن الهدف من الحوسبة ليس مجرد إجراء الحسابات، وإنما الوصول إلى:
-
-Data
- ↓
+```text
+Raw Data
+↓
+Processing
+↓
 Analysis
- ↓
-Understanding
- ↓
+↓
 Insight
+↓
+Decision
+```
 
-⸻
+---
 
- Data Science Applications
+## Big Data Opportunities 🚀
 
-علم البيانات يستخدم في مجالات كثيرة.
+الزيادة الكبيرة في البيانات أدت إلى فرص كثيرة في مجالات مثل:
 
-Healthcare 🏥
+```text
+Artificial Intelligence
+Machine Learning
+Natural Language Processing
+Data Science
+```
 
-* Cancer Diagnosis
-* Brain Mapping
-* Electronic Health Records
-* Medical Device Monitoring
+---
 
-Security 🔐
+## Big Data Use Cases 🌍
 
-* Fraud Detection
-* Cybersecurity
-* Threat Detection
+### Healthcare
 
-AI / NLP 🤖
+```text
+Cancer Diagnosis
+Brain Mapping
+Electronic Health Records
+Medical Device Monitoring
+```
 
-* Machine Translation
-* Text Summarization
-* Emotion Detection
-* Sentiment Analysis
+### Security
 
-Smart Cities 🏙️
+```text
+Fraud Detection
+Cybersecurity
+Threat Detection
+```
 
-* Autonomous Vehicles
-* Smart Traffic
-* Smart Homes
-* Ride-sharing
+### AI & NLP
 
-⸻
-
- Big Data and AI
-
-الـ Big Data ساعدت في تطور:
-
-* Artificial Intelligence
-* Machine Learning
-* Deep Learning
-* Natural Language Processing
-
-لأن كثيرًا من أنظمة التعلم تحتاج إلى كميات كبيرة من البيانات.
-
-⸻
-
- Big Data and NLP
-
-أمثلة:
-
-CV Analysis
+```text
+Machine Translation
 Text Summarization
+Emotion Detection
 Sentiment Analysis
-Translation
+```
 
-البيانات هنا قد تكون:
+### Smart Cities
 
-Unstructured Text
+```text
+Self-Driving Cars
+Smart Traffic
+Smart Homes
+Ride-Sharing
+```
 
-ويتم استخدام تقنيات NLP لاستخراج المعلومات والمعنى منها.
+---
 
-⸻
+## FLOPS ⚡
 
- Veracity and AI Decisions ⚠️
+اختصار:
 
-جودة البيانات مهمة جدًا.
-
-إذا كانت البيانات:
-
-* Incorrect
-* Incomplete
-* Biased
-
-فقد يتعلم النظام نتائج سيئة.
-
-Bad Data
-   ↓
-Bad Model
-   ↓
-Bad Decisions
-
-⸻
-
- Memory Limits 💾
-
-في Problem Solving قد نجد:
-
-Memory Limit: 256 MB
-
-يجب أن نحسب كمية الذاكرة التي تحتاجها الـ Data Structures.
-
-مثال:
-
-100,000,000 integers
-
-إذا كان:
-
-int = 4 bytes
-
-إذن:
-
-100,000,000 × 4
-=
-400,000,000 bytes
-≈ 400 MB
-
-وهذا أكبر من:
-
-256 MB
-
-لذلك قد نحصل على:
-
-Memory Limit Exceeded
-
-⸻
-
- Data Size Units
-
-الترتيب:
-
-Byte
- ↓
-Kilobyte (KB)
- ↓
-Megabyte (MB)
- ↓
-Gigabyte (GB)
- ↓
-Terabyte (TB)
- ↓
-Petabyte (PB)
- ↓
-Exabyte (EB)
- ↓
-Zettabyte (ZB)
-
-تقريبًا في النظام الثنائي:
-
-1 MB ≈ 2²⁰ bytes
-1 GB ≈ 2³⁰ bytes
-1 TB ≈ 2⁴⁰ bytes
-
-وفي النظام العشري:
-
-1 PB = 1000 TB
-1 EB = 1000 PB
-1 ZB = 1000 EB
-
-⸻
-
- Computing Power ⚡
-
-تقاس القدرة على تنفيذ Floating-Point Operations باستخدام:
-
-FLOPS
-
-أي:
-
+```text
 Floating-Point Operations Per Second
+```
 
-ومن الوحدات:
+ويستخدم لقياس عدد عمليات الـ Floating Point التي يستطيع النظام تنفيذها في الثانية.
 
+تطور الأداء وصل إلى مستويات ضخمة مثل:
+
+```text
 GFLOPS
 TFLOPS
 PFLOPS
 EFLOPS
+```
 
-⸻
+---
 
- Supercomputing
+## Quantum Computers ⚛️
 
-القدرات الحسابية الضخمة تستخدم في:
+الـ Quantum Computers مجال ما زال قيد التطوير.
 
-* Big Data
-* Scientific Computing
-* AI
-* Simulations
+تعتمد على مبادئ الحوسبة الكمية، وقد توفر قدرات كبيرة جدًا لبعض أنواع المسائل.
 
-ومن التقنيات المستخدمة:
+ومن أسباب الاهتمام بها:
 
-* Powerful CPUs / GPUs
-* Parallel Computing
-* Distributed Computing
-* Supercomputers
+```text
+Cryptography
+Optimization
+Simulation
+```
 
-⸻
+---
 
-Quantum Computers ⚛️
+## AI 🤖
 
-Quantum Computing مجال مختلف عن الحوسبة التقليدية.
+الذكاء الاصطناعي يهدف إلى بناء أنظمة تستطيع تنفيذ مهام تتطلب عادةً قدرات ذكية.
 
-يستخدم:
+ومن الأهداف بعيدة المدى:
 
-Qubits
-
-بدل الاعتماد فقط على Classical Bits.
-
-وله تطبيقات محتملة في بعض أنواع المسائل، كما قد يؤثر مستقبلًا على بعض أنظمة التشفير.
-
-⸻
-
- Energy Consumption 🔋
-
-تشغيل أنظمة حوسبية قوية ومعالجة Big Data يحتاج إلى كميات كبيرة من الطاقة.
-
-More Computing
-      ↓
-More Energy Demand
-
-لذلك تصبح كفاءة الـ Hardware والـ Algorithms مهمة جدًا.
-
-⸻
-
- Artificial Intelligence 🤖
-
-AI — Artificial Intelligence
-
-يهدف إلى بناء أنظمة تستطيع أداء مهام تتطلب عادةً قدرات ذكية.
-
-أمثلة:
-
-* Understanding Language
-* Recognizing Patterns
-* Playing Games
-* Making Predictions
-* Learning from Data
-
-⸻
-
+```text
 AGI
+```
 
-AGI — Artificial General Intelligence
+أي:
 
-هو مفهوم لنظام ذكاء اصطناعي عام يستطيع أداء مجموعة واسعة من المهام الذكية بطريقة عامة تشبه قدرات الإنسان.
+```text
+Artificial General Intelligence
+```
 
-⸻
+وهو مفهوم يشير إلى نظام يمتلك قدرات عامة ومرنة في أداء مهام ذكية متعددة.
 
- AI Timeline 🕐
+---
 
-1997 — Deep Blue
+## AI Timeline 🧠
 
-IBM’s Deep Blue هزم بطل العالم في الشطرنج.
+### Deep Blue — 1997
 
-اعتمد بدرجة كبيرة على:
+IBM's:
 
-* Search
-* Massive Computation
-* Hardware مخصص وقوي
+```text
+Deep Blue
+```
 
-⸻
+هزم بطل العالم في الشطرنج.
 
-2011 — Watson
+واعتمد بدرجة كبيرة على البحث المكثف في احتمالات النقلات.
 
-IBM’s Watson فاز على متسابقين بارزين في:
+---
 
+### Watson — 2011
+
+IBM's:
+
+```text
+Watson
+```
+
+فاز في:
+
+```text
 Jeopardy!
+```
 
 واستخدم تقنيات مرتبطة بـ:
 
+```text
 Natural Language Processing
+```
 
-لتحليل كميات ضخمة من المعلومات والإجابة عن الأسئلة.
+للتعامل مع كميات ضخمة من المعلومات.
 
-⸻
+---
 
-2015 — AlphaGo
+### AlphaGo — 2015
 
-طورت Google DeepMind:
+Google's:
 
+```text
 AlphaGo
+```
 
-للعب:
+استخدم:
 
-Go
-
-واستخدم:
-
-* Deep Learning
-* Neural Networks
-
-ونجح في هزيمة لاعب محترف في Go.
-
-⸻
-
-AlphaZero
-
-AlphaZero استخدم:
-
-Reinforcement Learning
-
-وتعلم من خلال اللعب ضد نفسه.
-
-الفكرة:
-
-Rules
- ↓
-Self-Play
- ↓
-Learning
- ↓
-Improvement
-
-⸻
-
- Evolution of AI
-
-يمكن تلخيص التطور:
-
-Deep Blue
-   ↓
-Search + Massive Computation
-   ↓
-Watson
-   ↓
-Language + Information Processing
-   ↓
-AlphaGo
-   ↓
+```text
 Deep Learning
-   ↓
+Neural Networks
+```
+
+لعب لعبة Go والتفوق على لاعب محترف.
+
+---
+
+### AlphaZero
+
+نظام:
+
+```text
 AlphaZero
-   ↓
-Self-Play + Reinforcement Learning
+```
 
-⸻
+استخدم:
 
- The AI Effect
+```text
+Reinforcement Learning
+```
 
-هناك فكرة معروفة:
+وتعلم اللعب من خلال التجربة بدل الاعتماد على تعليم بشري مباشر لخطط اللعب.
 
-Once a problem is solved successfully, people may stop considering it “AI” and see it as ordinary software.
+---
 
-أي أن بعض المهام التي كانت تعتبر AI تصبح مع الوقت جزءًا من البرمجيات العادية.
+## Brute Force vs Algorithms
 
-⸻
+الـ Brute Force يحاول عددًا كبيرًا من الاحتمالات.
 
-38. Hardware + Software
+```text
+Problem
+↓
+Try Many Possibilities
+↓
+Find Solution
+```
 
-من أهم أفكار الشابتر:
+لكن المشكلة أن عدد الاحتمالات قد يصبح ضخمًا جدًا.
 
-Software
+لذلك نحتاج:
+
+```text
+Better Algorithms
 +
-Algorithms
-+
-Hardware
-=
-Computing System
+Better Hardware
+```
 
-الأداء لا يعتمد على الـ Software فقط.
+---
 
-فالـ Hardware Architecture يمكن أن يجعل خوارزمية معينة عملية في وقت معين.
+# 🧠 الصورة الكبيرة للشابتر
 
-⸻
+كل الأفكار السابقة مرتبطة ببعضها:
 
-🧠 Final Big Picture
-
-
-
+```text
 Programming Languages
-          ↓
-       Source Code
-          ↓
-Edit → Preprocess → Compile → Link
-          ↓
-         Load
-          ↓
-       Execute
-          ↓
-       Computer
-          ↓
-      Networking
-          ↓
-       Internet
-          ↓
-         Web
-          ↓
-        Cloud
-          ↓
-       Big Data
-          ↓
-     Data Science
-          ↓
-Artificial Intelligence
-          ↓
- Machine Learning
-          ↓
-   Deep Learning
-          ↓
-       Insight
-
-⸻
-
-🎯 أهم الحاجات اللي لازم أفتكرها
-
-Programming Languages
-
-C/C++     → Performance + Hardware
-Python    → AI + Data Science
-Java      → JVM + Enterprise
-JavaScript→ Web + Node.js
-C#        → Microsoft + Applications
-Swift     → Apple
-R         → Statistics + Data Analysis
-
-Program Execution
-
+        ↓
+Writing Code
+        ↓
 Edit
-→ Preprocess
-→ Compile
-→ Link
-→ Load
-→ Execute
-
+        ↓
+Preprocess
+        ↓
+Compile
+        ↓
+Link
+        ↓
+Load
+        ↓
+Execute
+        ↓
+Operating Systems
+        ↓
+Networks
+        ↓
 Internet
-
-TCP → Reliable Delivery
-IP  → Addressing / Routing
-
+        ↓
 Web
-
-HTML → Structure
-HTTP → Communication
-WWW  → Web
-
+        ↓
 Cloud
-
-SaaS
-PaaS
-IaaS
-
+        ↓
+IoT
+        ↓
 Big Data
+        ↓
+Data Analytics
+        ↓
+Artificial Intelligence
+        ↓
+Machine Learning
+        ↓
+Future Computing
+```
 
-Volume
-Velocity
-Variety
-Veracity
+الفكرة الأساسية للشابتر:
 
-Software Engineering
-
-Refactoring
-Design Patterns
-SDKs
-
-AI
-
-Deep Blue
-   ↓
-Watson
-   ↓
-AlphaGo
-   ↓
-AlphaZero
-
-⸻
-
-🏁 Chapter 1 — Final Takeaway
-
-Computer Science مش مجرد كتابة كود.
-
-إحنا بنبدأ من:
-
-Programming
-
-ثم نفهم:
-
-How Code Is Compiled
-How Programs Run
-How Computers Communicate
-How the Internet Works
-How the Web Works
-How Cloud Systems Work
-How Massive Data Is Stored and Processed
-How Data Science Extracts Insights
-How AI Learns From Data
-
-وفي النهاية:
-
-Code
- ↓
-Computer
- ↓
-Network
- ↓
-Cloud
- ↓
-Big Data
- ↓
-Data Science
- ↓
-AI
- ↓
-Insight
-
-🎉 End of Chapter 1
+> الكمبيوتر مش مجرد جهاز بنكتب عليه كود؛ هو منظومة كاملة تبدأ من لغة البرمجة، وتمر بالـ Compiler والـ Hardware والـ Operating System والشبكات، وتوصل في النهاية إلى Cloud وBig Data وAI.
 
